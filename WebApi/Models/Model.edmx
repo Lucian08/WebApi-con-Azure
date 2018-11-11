@@ -1,0 +1,1006 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdServicio" Type="int" />
+          <Property Name="IdTarea" Type="int" />
+        </EntityType>
+        <EntityType Name="Asesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rut" Type="int" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Nacionalidad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdComuna" Type="int" Nullable="false" />
+          <Property Name="IdHorario" Type="int" Nullable="false" />
+          <Property Name="ValorHora" Type="money" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Fono" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rut" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRegion" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdComuna" Type="int" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="7" />
+          <Property Name="NombreCalle" Type="nvarchar" MaxLength="20" />
+          <Property Name="Numero" Type="int" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CantidadHoras" Type="int" Nullable="false" />
+          <Property Name="Dias" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PuntuacioAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAsesor" Type="int" />
+          <Property Name="IdServicio" Type="int" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="500" />
+          <Property Name="Puntos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PuntuacioCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAsesor" Type="int" />
+          <Property Name="IdReserva" Type="int" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="500" />
+          <Property Name="Puntos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="55" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdAsesor" Type="int" />
+          <Property Name="IdDireccion" Type="int" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="CantidadHoras" Type="int" Nullable="false" />
+          <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraTermino" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Total" Type="money" />
+          <Property Name="Notificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormaPago" Type="nvarchar" MaxLength="20" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TareaAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAsesor" Type="int" />
+          <Property Name="IdTarea" Type="int" />
+        </EntityType>
+        <Association Name="FK__Actividad__IdSer__6D0D32F4">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actividad__IdTar__6E01572D">
+          <End Role="Tarea" Type="Self.Tarea" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asesor__IdComuna__5535A963">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Asesor">
+              <PropertyRef Name="IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asesor__IdHorari__5629CD9C">
+          <End Role="Horario" Type="Self.Horario" Multiplicity="1" />
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Asesor">
+              <PropertyRef Name="IdHorario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comuna__IdRegion__4BAC3F29">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comuna">
+              <PropertyRef Name="IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__IdCli__5BE2A6F2">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__IdCom__5CD6CB2B">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdAse__656C112C">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="PuntuacioAsesor" Type="Self.PuntuacioAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdAse__70DDC3D8">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="PuntuacioCliente" Type="Self.PuntuacioCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioCliente">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdRes__71D1E811">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="PuntuacioCliente" Type="Self.PuntuacioCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioCliente">
+              <PropertyRef Name="IdReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdSer__66603565">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="PuntuacioAsesor" Type="Self.PuntuacioAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioAsesor">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdAses__619B8048">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdClie__60A75C0F">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdDire__628FA481">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdDireccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TareaAses__IdAse__693CA210">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="TareaAsesor" Type="Self.TareaAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TareaAses__IdTar__6A30C649">
+          <End Role="Tarea" Type="Self.Tarea" Multiplicity="0..1" />
+          <End Role="TareaAsesor" Type="Self.TareaAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaAsesor">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoModelStoreContainer">
+          <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asesor" EntityType="Self.Asesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario" EntityType="Self.Horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PuntuacioAsesor" EntityType="Self.PuntuacioAsesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PuntuacioCliente" EntityType="Self.PuntuacioCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarea" EntityType="Self.Tarea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TareaAsesor" EntityType="Self.TareaAsesor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Actividad__IdSer__6D0D32F4" Association="Self.FK__Actividad__IdSer__6D0D32F4">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actividad__IdTar__6E01572D" Association="Self.FK__Actividad__IdTar__6E01572D">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asesor__IdComuna__5535A963" Association="Self.FK__Asesor__IdComuna__5535A963">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Asesor" EntitySet="Asesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asesor__IdHorari__5629CD9C" Association="Self.FK__Asesor__IdHorari__5629CD9C">
+            <End Role="Horario" EntitySet="Horario" />
+            <End Role="Asesor" EntitySet="Asesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comuna__IdRegion__4BAC3F29" Association="Self.FK__Comuna__IdRegion__4BAC3F29">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Comuna" EntitySet="Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__IdCli__5BE2A6F2" Association="Self.FK__Direccion__IdCli__5BE2A6F2">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__IdCom__5CD6CB2B" Association="Self.FK__Direccion__IdCom__5CD6CB2B">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdAse__656C112C" Association="Self.FK__Puntuacio__IdAse__656C112C">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="PuntuacioAsesor" EntitySet="PuntuacioAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdAse__70DDC3D8" Association="Self.FK__Puntuacio__IdAse__70DDC3D8">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="PuntuacioCliente" EntitySet="PuntuacioCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdRes__71D1E811" Association="Self.FK__Puntuacio__IdRes__71D1E811">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PuntuacioCliente" EntitySet="PuntuacioCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdSer__66603565" Association="Self.FK__Puntuacio__IdSer__66603565">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PuntuacioAsesor" EntitySet="PuntuacioAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdAses__619B8048" Association="Self.FK__Servicio__IdAses__619B8048">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdClie__60A75C0F" Association="Self.FK__Servicio__IdClie__60A75C0F">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdDire__628FA481" Association="Self.FK__Servicio__IdDire__628FA481">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TareaAses__IdAse__693CA210" Association="Self.FK__TareaAses__IdAse__693CA210">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="TareaAsesor" EntitySet="TareaAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TareaAses__IdTar__6A30C649" Association="Self.FK__TareaAses__IdTar__6A30C649">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="TareaAsesor" EntitySet="TareaAsesor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdServicio" Type="Int32" />
+          <Property Name="IdTarea" Type="Int32" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Actividad__IdSer__6D0D32F4" FromRole="Actividades" ToRole="Servicio" />
+          <NavigationProperty Name="Tarea" Relationship="Self.FK__Actividad__IdTar__6E01572D" FromRole="Actividades" ToRole="Tarea" />
+        </EntityType>
+        <EntityType Name="Asesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rut" Type="Int32" Nullable="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdComuna" Type="Int32" Nullable="false" />
+          <Property Name="IdHorario" Type="Int32" Nullable="false" />
+          <Property Name="ValorHora" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fono" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK__Asesor__IdComuna__5535A963" FromRole="Asesor" ToRole="Comuna" />
+          <NavigationProperty Name="Horario" Relationship="Self.FK__Asesor__IdHorari__5629CD9C" FromRole="Asesor" ToRole="Horario" />
+          <NavigationProperty Name="PuntuacioAsesor" Relationship="Self.FK__Puntuacio__IdAse__656C112C" FromRole="Asesor" ToRole="PuntuacioAsesor" />
+          <NavigationProperty Name="PuntuacioCliente" Relationship="Self.FK__Puntuacio__IdAse__70DDC3D8" FromRole="Asesor" ToRole="PuntuacioCliente" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Servicio__IdAses__619B8048" FromRole="Asesor" ToRole="Servicio" />
+          <NavigationProperty Name="TareaAsesor" Relationship="Self.FK__TareaAses__IdAse__693CA210" FromRole="Asesor" ToRole="TareaAsesor" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rut" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Direccion__IdCli__5BE2A6F2" FromRole="Cliente" ToRole="Direccion" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Servicio__IdClie__60A75C0F" FromRole="Cliente" ToRole="Servicio" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Comuna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRegion" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__Asesor__IdComuna__5535A963" FromRole="Comuna" ToRole="Asesor" />
+          <NavigationProperty Name="Region" Relationship="Self.FK__Comuna__IdRegion__4BAC3F29" FromRole="Comuna" ToRole="Region" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Direccion__IdCom__5CD6CB2B" FromRole="Comuna" ToRole="Direccion" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdComuna" Type="Int32" />
+          <Property Name="Calle" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCalle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Direccion__IdCli__5BE2A6F2" FromRole="Direccion" ToRole="Cliente" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK__Direccion__IdCom__5CD6CB2B" FromRole="Direccion" ToRole="Comuna" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Servicio__IdDire__628FA481" FromRole="Direccion" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
+          <Property Name="Dias" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__Asesor__IdHorari__5629CD9C" FromRole="Horario" ToRole="Asesor" />
+        </EntityType>
+        <EntityType Name="PuntuacioAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAsesor" Type="Int32" />
+          <Property Name="IdServicio" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Puntos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__Puntuacio__IdAse__656C112C" FromRole="PuntuacioAsesor" ToRole="Asesor" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Puntuacio__IdSer__66603565" FromRole="PuntuacioAsesor" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="PuntuacioCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAsesor" Type="Int32" />
+          <Property Name="IdReserva" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Puntos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__Puntuacio__IdAse__70DDC3D8" FromRole="PuntuacioCliente" ToRole="Asesor" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Puntuacio__IdRes__71D1E811" FromRole="PuntuacioCliente" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Region1" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comuna" Relationship="Self.FK__Comuna__IdRegion__4BAC3F29" FromRole="Region" ToRole="Comuna" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdAsesor" Type="Int32" />
+          <Property Name="IdDireccion" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraTermino" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Notificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormaPago" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK__Actividad__IdSer__6D0D32F4" FromRole="Servicio" ToRole="Actividades" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__Servicio__IdAses__619B8048" FromRole="Servicio" ToRole="Asesor" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Servicio__IdClie__60A75C0F" FromRole="Servicio" ToRole="Cliente" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Servicio__IdDire__628FA481" FromRole="Servicio" ToRole="Direccion" />
+          <NavigationProperty Name="PuntuacioAsesor" Relationship="Self.FK__Puntuacio__IdSer__66603565" FromRole="Servicio" ToRole="PuntuacioAsesor" />
+          <NavigationProperty Name="PuntuacioCliente" Relationship="Self.FK__Puntuacio__IdRes__71D1E811" FromRole="Servicio" ToRole="PuntuacioCliente" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Actividades" Relationship="Self.FK__Actividad__IdTar__6E01572D" FromRole="Tarea" ToRole="Actividades" />
+          <NavigationProperty Name="TareaAsesor" Relationship="Self.FK__TareaAses__IdTar__6A30C649" FromRole="Tarea" ToRole="TareaAsesor" />
+        </EntityType>
+        <EntityType Name="TareaAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAsesor" Type="Int32" />
+          <Property Name="IdTarea" Type="Int32" />
+          <NavigationProperty Name="Asesor" Relationship="Self.FK__TareaAses__IdAse__693CA210" FromRole="TareaAsesor" ToRole="Asesor" />
+          <NavigationProperty Name="Tarea" Relationship="Self.FK__TareaAses__IdTar__6A30C649" FromRole="TareaAsesor" ToRole="Tarea" />
+        </EntityType>
+        <Association Name="FK__Actividad__IdSer__6D0D32F4">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actividad__IdTar__6E01572D">
+          <End Role="Tarea" Type="Self.Tarea" Multiplicity="0..1" />
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividades">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asesor__IdComuna__5535A963">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="1" />
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Asesor">
+              <PropertyRef Name="IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asesor__IdHorari__5629CD9C">
+          <End Role="Horario" Type="Self.Horario" Multiplicity="1" />
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Horario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Asesor">
+              <PropertyRef Name="IdHorario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdAse__656C112C">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="PuntuacioAsesor" Type="Self.PuntuacioAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdAse__70DDC3D8">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="PuntuacioCliente" Type="Self.PuntuacioCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioCliente">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdAses__619B8048">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TareaAses__IdAse__693CA210">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="TareaAsesor" Type="Self.TareaAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__IdCli__5BE2A6F2">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdClie__60A75C0F">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comuna__IdRegion__4BAC3F29">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comuna">
+              <PropertyRef Name="IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__IdCom__5CD6CB2B">
+          <End Role="Comuna" Type="Self.Comuna" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comuna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="IdComuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__IdDire__628FA481">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="IdDireccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdSer__66603565">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="PuntuacioAsesor" Type="Self.PuntuacioAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioAsesor">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Puntuacio__IdRes__71D1E811">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="PuntuacioCliente" Type="Self.PuntuacioCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuntuacioCliente">
+              <PropertyRef Name="IdReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TareaAses__IdTar__6A30C649">
+          <End Role="Tarea" Type="Self.Tarea" Multiplicity="0..1" />
+          <End Role="TareaAsesor" Type="Self.TareaAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaAsesor">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividades" EntityType="Self.Actividades" />
+          <EntitySet Name="Asesor" EntityType="Self.Asesor" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Comuna" EntityType="Self.Comuna" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Horario" EntityType="Self.Horario" />
+          <EntitySet Name="PuntuacioAsesor" EntityType="Self.PuntuacioAsesor" />
+          <EntitySet Name="PuntuacioCliente" EntityType="Self.PuntuacioCliente" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" />
+          <EntitySet Name="Tarea" EntityType="Self.Tarea" />
+          <EntitySet Name="TareaAsesor" EntityType="Self.TareaAsesor" />
+          <AssociationSet Name="FK__Actividad__IdSer__6D0D32F4" Association="Self.FK__Actividad__IdSer__6D0D32F4">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actividad__IdTar__6E01572D" Association="Self.FK__Actividad__IdTar__6E01572D">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="Actividades" EntitySet="Actividades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asesor__IdComuna__5535A963" Association="Self.FK__Asesor__IdComuna__5535A963">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Asesor" EntitySet="Asesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asesor__IdHorari__5629CD9C" Association="Self.FK__Asesor__IdHorari__5629CD9C">
+            <End Role="Horario" EntitySet="Horario" />
+            <End Role="Asesor" EntitySet="Asesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdAse__656C112C" Association="Self.FK__Puntuacio__IdAse__656C112C">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="PuntuacioAsesor" EntitySet="PuntuacioAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdAse__70DDC3D8" Association="Self.FK__Puntuacio__IdAse__70DDC3D8">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="PuntuacioCliente" EntitySet="PuntuacioCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdAses__619B8048" Association="Self.FK__Servicio__IdAses__619B8048">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TareaAses__IdAse__693CA210" Association="Self.FK__TareaAses__IdAse__693CA210">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="TareaAsesor" EntitySet="TareaAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__IdCli__5BE2A6F2" Association="Self.FK__Direccion__IdCli__5BE2A6F2">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdClie__60A75C0F" Association="Self.FK__Servicio__IdClie__60A75C0F">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comuna__IdRegion__4BAC3F29" Association="Self.FK__Comuna__IdRegion__4BAC3F29">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Comuna" EntitySet="Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__IdCom__5CD6CB2B" Association="Self.FK__Direccion__IdCom__5CD6CB2B">
+            <End Role="Comuna" EntitySet="Comuna" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__IdDire__628FA481" Association="Self.FK__Servicio__IdDire__628FA481">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdSer__66603565" Association="Self.FK__Puntuacio__IdSer__66603565">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PuntuacioAsesor" EntitySet="PuntuacioAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Puntuacio__IdRes__71D1E811" Association="Self.FK__Puntuacio__IdRes__71D1E811">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PuntuacioCliente" EntitySet="PuntuacioCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TareaAses__IdTar__6A30C649" Association="Self.FK__TareaAses__IdTar__6A30C649">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="TareaAsesor" EntitySet="TareaAsesor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoModelStoreContainer" CdmEntityContainer="ProyectoEntities">
+          <EntitySetMapping Name="Actividades">
+            <EntityTypeMapping TypeName="ProyectoModel.Actividades">
+              <MappingFragment StoreEntitySet="Actividades">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+                <ScalarProperty Name="IdTarea" ColumnName="IdTarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asesor">
+            <EntityTypeMapping TypeName="ProyectoModel.Asesor">
+              <MappingFragment StoreEntitySet="Asesor">
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="IdComuna" ColumnName="IdComuna" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="ValorHora" ColumnName="ValorHora" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Fono" ColumnName="Fono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="ProyectoModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comuna">
+            <EntityTypeMapping TypeName="ProyectoModel.Comuna">
+              <MappingFragment StoreEntitySet="Comuna">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRegion" ColumnName="IdRegion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="ProyectoModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdComuna" ColumnName="IdComuna" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NombreCalle" ColumnName="NombreCalle" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horario">
+            <EntityTypeMapping TypeName="ProyectoModel.Horario">
+              <MappingFragment StoreEntitySet="Horario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PuntuacioAsesor">
+            <EntityTypeMapping TypeName="ProyectoModel.PuntuacioAsesor">
+              <MappingFragment StoreEntitySet="PuntuacioAsesor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
+                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PuntuacioCliente">
+            <EntityTypeMapping TypeName="ProyectoModel.PuntuacioCliente">
+              <MappingFragment StoreEntitySet="PuntuacioCliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
+                <ScalarProperty Name="IdReserva" ColumnName="IdReserva" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="ProyectoModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Region1" ColumnName="Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio">
+            <EntityTypeMapping TypeName="ProyectoModel.Servicio">
+              <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
+                <ScalarProperty Name="IdDireccion" ColumnName="IdDireccion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="HoraTermino" ColumnName="HoraTermino" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Notificacion" ColumnName="Notificacion" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarea">
+            <EntityTypeMapping TypeName="ProyectoModel.Tarea">
+              <MappingFragment StoreEntitySet="Tarea">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TareaAsesor">
+            <EntityTypeMapping TypeName="ProyectoModel.TareaAsesor">
+              <MappingFragment StoreEntitySet="TareaAsesor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
+                <ScalarProperty Name="IdTarea" ColumnName="IdTarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

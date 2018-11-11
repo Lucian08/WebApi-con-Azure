@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acae4cb6dde04a97be7deaf181853bbf" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoModel.Actividades" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Asesor" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Cliente" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Comuna" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Direccion" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Horario" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.PuntuacioAsesor" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.PuntuacioCliente" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Region" Width="1.5" PointX="1.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Servicio" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Tarea" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.TareaAsesor" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoModel.FK__Actividad__IdSer__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Actividad__IdTar__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Asesor__IdComuna__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Asesor__IdHorari__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Puntuacio__IdAse__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Puntuacio__IdAse__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Servicio__IdAses__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__TareaAses__IdAse__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Direccion__IdCli__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Servicio__IdClie__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Comuna__IdRegion__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Direccion__IdCom__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Servicio__IdDire__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Puntuacio__IdSer__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__Puntuacio__IdRes__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK__TareaAses__IdTar__6A30C649" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
