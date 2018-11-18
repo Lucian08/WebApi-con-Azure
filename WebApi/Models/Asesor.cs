@@ -21,6 +21,7 @@ namespace WebApi.Models
             this.PuntuacioCliente = new HashSet<PuntuacioCliente>();
             this.Servicio = new HashSet<Servicio>();
             this.TareaAsesor = new HashSet<TareaAsesor>();
+            this.DiasAsesor = new HashSet<DiasAsesor>();
         }
     
         public int Id { get; set; }
@@ -33,7 +34,6 @@ namespace WebApi.Models
         public System.DateTime FechaNacimiento { get; set; }
         public string Nacionalidad { get; set; }
         public int IdComuna { get; set; }
-        public int IdHorario { get; set; }
         public decimal ValorHora { get; set; }
         public string Comentario { get; set; }
         public int Fono { get; set; }
@@ -41,7 +41,6 @@ namespace WebApi.Models
         public string Contrasena { get; set; }
     
         public virtual Comuna Comuna { get; set; }
-        public virtual Horario Horario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PuntuacioAsesor> PuntuacioAsesor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -50,5 +49,7 @@ namespace WebApi.Models
         public virtual ICollection<Servicio> Servicio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TareaAsesor> TareaAsesor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DiasAsesor> DiasAsesor { get; set; }
     }
 }

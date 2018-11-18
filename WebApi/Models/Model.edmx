@@ -27,7 +27,6 @@
           <Property Name="FechaNacimiento" Type="date" Nullable="false" />
           <Property Name="Nacionalidad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdComuna" Type="int" Nullable="false" />
-          <Property Name="IdHorario" Type="int" Nullable="false" />
           <Property Name="ValorHora" Type="money" Nullable="false" />
           <Property Name="Comentario" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Fono" Type="int" Nullable="false" />
@@ -54,6 +53,21 @@
           <Property Name="IdRegion" Type="int" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dia" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiasAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAsesor" Type="int" />
+          <Property Name="IdDia" Type="int" />
+        </EntityType>
         <EntityType Name="Direccion">
           <Key>
             <PropertyRef Name="Id" />
@@ -64,14 +78,6 @@
           <Property Name="Calle" Type="nvarchar" MaxLength="7" />
           <Property Name="NombreCalle" Type="nvarchar" MaxLength="20" />
           <Property Name="Numero" Type="int" />
-        </EntityType>
-        <EntityType Name="Horario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CantidadHoras" Type="int" Nullable="false" />
-          <Property Name="Dias" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="PuntuacioAsesor">
           <Key>
@@ -116,6 +122,16 @@
           <Property Name="Notificacion" Type="nvarchar" MaxLength="50" />
           <Property Name="FormaPago" Type="nvarchar" MaxLength="20" />
           <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tarea">
           <Key>
@@ -168,18 +184,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Asesor__IdHorari__5629CD9C">
-          <End Role="Horario" Type="Self.Horario" Multiplicity="1" />
-          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Horario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Asesor">
-              <PropertyRef Name="IdHorario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Comuna__IdRegion__4BAC3F29">
           <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
           <End Role="Comuna" Type="Self.Comuna" Multiplicity="*" />
@@ -189,6 +193,30 @@
             </Principal>
             <Dependent Role="Comuna">
               <PropertyRef Name="IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DiasAseso__IdAse__160F4887">
+          <End Role="Asesor" Type="Self.Asesor" Multiplicity="0..1" />
+          <End Role="DiasAsesor" Type="Self.DiasAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiasAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DiasAseso__IdDia__17036CC0">
+          <End Role="Dias" Type="Self.Dias" Multiplicity="0..1" />
+          <End Role="DiasAsesor" Type="Self.DiasAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiasAsesor">
+              <PropertyRef Name="IdDia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -329,12 +357,14 @@
           <EntitySet Name="Asesor" EntityType="Self.Asesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comuna" EntityType="Self.Comuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dias" EntityType="Self.Dias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiasAsesor" EntityType="Self.DiasAsesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Horario" EntityType="Self.Horario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuntuacioAsesor" EntityType="Self.PuntuacioAsesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuntuacioCliente" EntityType="Self.PuntuacioCliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tarea" EntityType="Self.Tarea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TareaAsesor" EntityType="Self.TareaAsesor" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Actividad__IdSer__6D0D32F4" Association="Self.FK__Actividad__IdSer__6D0D32F4">
@@ -349,13 +379,17 @@
             <End Role="Comuna" EntitySet="Comuna" />
             <End Role="Asesor" EntitySet="Asesor" />
           </AssociationSet>
-          <AssociationSet Name="FK__Asesor__IdHorari__5629CD9C" Association="Self.FK__Asesor__IdHorari__5629CD9C">
-            <End Role="Horario" EntitySet="Horario" />
-            <End Role="Asesor" EntitySet="Asesor" />
-          </AssociationSet>
           <AssociationSet Name="FK__Comuna__IdRegion__4BAC3F29" Association="Self.FK__Comuna__IdRegion__4BAC3F29">
             <End Role="Region" EntitySet="Region" />
             <End Role="Comuna" EntitySet="Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DiasAseso__IdAse__160F4887" Association="Self.FK__DiasAseso__IdAse__160F4887">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="DiasAsesor" EntitySet="DiasAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DiasAseso__IdDia__17036CC0" Association="Self.FK__DiasAseso__IdDia__17036CC0">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="DiasAsesor" EntitySet="DiasAsesor" />
           </AssociationSet>
           <AssociationSet Name="FK__Direccion__IdCli__5BE2A6F2" Association="Self.FK__Direccion__IdCli__5BE2A6F2">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -430,18 +464,17 @@
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdComuna" Type="Int32" Nullable="false" />
-          <Property Name="IdHorario" Type="Int32" Nullable="false" />
           <Property Name="ValorHora" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fono" Type="Int32" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Comuna" Relationship="Self.FK__Asesor__IdComuna__5535A963" FromRole="Asesor" ToRole="Comuna" />
-          <NavigationProperty Name="Horario" Relationship="Self.FK__Asesor__IdHorari__5629CD9C" FromRole="Asesor" ToRole="Horario" />
           <NavigationProperty Name="PuntuacioAsesor" Relationship="Self.FK__Puntuacio__IdAse__656C112C" FromRole="Asesor" ToRole="PuntuacioAsesor" />
           <NavigationProperty Name="PuntuacioCliente" Relationship="Self.FK__Puntuacio__IdAse__70DDC3D8" FromRole="Asesor" ToRole="PuntuacioCliente" />
           <NavigationProperty Name="Servicio" Relationship="Self.FK__Servicio__IdAses__619B8048" FromRole="Asesor" ToRole="Servicio" />
           <NavigationProperty Name="TareaAsesor" Relationship="Self.FK__TareaAses__IdAse__693CA210" FromRole="Asesor" ToRole="TareaAsesor" />
           <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DiasAsesor" Relationship="ProyectoModel.FK__DiasAseso__IdAse__160F4887" FromRole="Asesor" ToRole="DiasAsesor" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -481,15 +514,6 @@
           <NavigationProperty Name="Cliente" Relationship="Self.FK__Direccion__IdCli__5BE2A6F2" FromRole="Direccion" ToRole="Cliente" />
           <NavigationProperty Name="Comuna" Relationship="Self.FK__Direccion__IdCom__5CD6CB2B" FromRole="Direccion" ToRole="Comuna" />
           <NavigationProperty Name="Servicio" Relationship="Self.FK__Servicio__IdDire__628FA481" FromRole="Direccion" ToRole="Servicio" />
-        </EntityType>
-        <EntityType Name="Horario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
-          <Property Name="Dias" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Asesor" Relationship="Self.FK__Asesor__IdHorari__5629CD9C" FromRole="Horario" ToRole="Asesor" />
         </EntityType>
         <EntityType Name="PuntuacioAsesor">
           <Key>
@@ -598,18 +622,6 @@
             </Principal>
             <Dependent Role="Asesor">
               <PropertyRef Name="IdComuna" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Asesor__IdHorari__5629CD9C">
-          <End Role="Horario" Type="Self.Horario" Multiplicity="1" />
-          <End Role="Asesor" Type="Self.Asesor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Horario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Asesor">
-              <PropertyRef Name="IdHorario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -763,7 +775,6 @@
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Comuna" EntityType="Self.Comuna" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" />
-          <EntitySet Name="Horario" EntityType="Self.Horario" />
           <EntitySet Name="PuntuacioAsesor" EntityType="Self.PuntuacioAsesor" />
           <EntitySet Name="PuntuacioCliente" EntityType="Self.PuntuacioCliente" />
           <EntitySet Name="Region" EntityType="Self.Region" />
@@ -780,10 +791,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__Asesor__IdComuna__5535A963" Association="Self.FK__Asesor__IdComuna__5535A963">
             <End Role="Comuna" EntitySet="Comuna" />
-            <End Role="Asesor" EntitySet="Asesor" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Asesor__IdHorari__5629CD9C" Association="Self.FK__Asesor__IdHorari__5629CD9C">
-            <End Role="Horario" EntitySet="Horario" />
             <End Role="Asesor" EntitySet="Asesor" />
           </AssociationSet>
           <AssociationSet Name="FK__Puntuacio__IdAse__656C112C" Association="Self.FK__Puntuacio__IdAse__656C112C">
@@ -834,7 +841,70 @@
             <End Role="Tarea" EntitySet="Tarea" />
             <End Role="TareaAsesor" EntitySet="TareaAsesor" />
           </AssociationSet>
+          <EntitySet Name="Dias" EntityType="ProyectoModel.Dias" />
+          <EntitySet Name="DiasAsesor" EntityType="ProyectoModel.DiasAsesor" />
+          <EntitySet Name="sysdiagrams" EntityType="ProyectoModel.sysdiagrams" />
+          <AssociationSet Name="FK__DiasAseso__IdAse__160F4887" Association="ProyectoModel.FK__DiasAseso__IdAse__160F4887">
+            <End Role="Asesor" EntitySet="Asesor" />
+            <End Role="DiasAsesor" EntitySet="DiasAsesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DiasAseso__IdDia__17036CC0" Association="ProyectoModel.FK__DiasAseso__IdDia__17036CC0">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="DiasAsesor" EntitySet="DiasAsesor" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dia" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DiasAsesor" Relationship="ProyectoModel.FK__DiasAseso__IdDia__17036CC0" FromRole="Dias" ToRole="DiasAsesor" />
+        </EntityType>
+        <EntityType Name="DiasAsesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAsesor" Type="Int32" />
+          <Property Name="IdDia" Type="Int32" />
+          <NavigationProperty Name="Asesor" Relationship="ProyectoModel.FK__DiasAseso__IdAse__160F4887" FromRole="DiasAsesor" ToRole="Asesor" />
+          <NavigationProperty Name="Dias" Relationship="ProyectoModel.FK__DiasAseso__IdDia__17036CC0" FromRole="DiasAsesor" ToRole="Dias" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__DiasAseso__IdAse__160F4887">
+          <End Type="ProyectoModel.Asesor" Role="Asesor" Multiplicity="0..1" />
+          <End Type="ProyectoModel.DiasAsesor" Role="DiasAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asesor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiasAsesor">
+              <PropertyRef Name="IdAsesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DiasAseso__IdDia__17036CC0">
+          <End Type="ProyectoModel.Dias" Role="Dias" Multiplicity="0..1" />
+          <End Type="ProyectoModel.DiasAsesor" Role="DiasAsesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiasAsesor">
+              <PropertyRef Name="IdDia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -864,7 +934,6 @@
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
                 <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
                 <ScalarProperty Name="IdComuna" ColumnName="IdComuna" />
-                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
                 <ScalarProperty Name="ValorHora" ColumnName="ValorHora" />
                 <ScalarProperty Name="Comentario" ColumnName="Comentario" />
                 <ScalarProperty Name="Fono" ColumnName="Fono" />
@@ -903,15 +972,6 @@
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
                 <ScalarProperty Name="NombreCalle" ColumnName="NombreCalle" />
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Horario">
-            <EntityTypeMapping TypeName="ProyectoModel.Horario">
-              <MappingFragment StoreEntitySet="Horario">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
-                <ScalarProperty Name="Dias" ColumnName="Dias" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -977,6 +1037,34 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
                 <ScalarProperty Name="IdTarea" ColumnName="IdTarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dias">
+            <EntityTypeMapping TypeName="ProyectoModel.Dias">
+              <MappingFragment StoreEntitySet="Dias">
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiasAsesor">
+            <EntityTypeMapping TypeName="ProyectoModel.DiasAsesor">
+              <MappingFragment StoreEntitySet="DiasAsesor">
+                <ScalarProperty Name="IdDia" ColumnName="IdDia" />
+                <ScalarProperty Name="IdAsesor" ColumnName="IdAsesor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProyectoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

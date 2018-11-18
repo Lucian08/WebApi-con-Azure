@@ -30,12 +30,14 @@ namespace WebApi.Models
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Comuna> Comuna { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
-        public virtual DbSet<Horario> Horario { get; set; }
         public virtual DbSet<PuntuacioAsesor> PuntuacioAsesor { get; set; }
         public virtual DbSet<PuntuacioCliente> PuntuacioCliente { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<Tarea> Tarea { get; set; }
         public virtual DbSet<TareaAsesor> TareaAsesor { get; set; }
+        public virtual DbSet<Dias> Dias { get; set; }
+        public virtual DbSet<DiasAsesor> DiasAsesor { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

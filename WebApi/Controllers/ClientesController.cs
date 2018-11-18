@@ -114,5 +114,12 @@ namespace WebApi.Controllers
         {
             return db.Cliente.Count(e => e.Id == id) > 0;
         }
+
+
+
+        /*public void Auntenticated(string )
+        {
+
+        }*/
     }
 }
